@@ -2996,7 +2996,6 @@ function FastClick(a,b){"use strict";function c(a,b){return function(){return a.
           // Call the method
           obj[images](options);
 
-
           // No need to do anything further
           return;
         }
@@ -3006,23 +3005,10 @@ function FastClick(a,b){"use strict";function c(a,b){return function(){return a.
 
         // Remove the old instance
         obj.destroy(true);
-
-
       }
 
       obj = new Backstretch(this, images, options);
       $this.data('backstretch', obj);
-      // console.log($this.data());
-      
-    // img = $("img");
-    	/*$("img").each(function(index, el) {
-        extension = this.src.substr( (this.src.lastIndexOf('.') +1) );
-        fileName = this.src.split('.').slice(0, -1).join('.') + '.webp';
-        $(this).wrap('<picture></picture>');
-        $(this).parents('picture').prepend('<source srcset="' + fileName + '" data-srcset="' + fileName + '" type="image/webp"><source srcset="' + this.src + '" data-srcset="' + this.src + '" type="image/'+ extension+'">');
-    });*/
-
-
     });
   };
 
@@ -3094,8 +3080,6 @@ function FastClick(a,b){"use strict";function c(a,b){return function(){return a.
     // Preload images
     $.each(this.images, function () {
       $('<img />')[0].src = this;
-      // $('<source />')[0].srcset = this;
-      // $('img').wrap('<picture></picture>');
     });    
 
     // Convenience reference to know if the container is body.
@@ -3110,14 +3094,9 @@ function FastClick(a,b){"use strict";function c(a,b){return function(){return a.
     this.$container = $(container);
     this.$root = this.isBody ? supportsFixedPosition ? $(window) : $(document) : this.$container;
 
-      // console.log(this.$container);
-
-
     // Don't create a new wrap if one already exists (from a previous instance of Backstretch)
     var $existing = this.$container.children(".backstretch").first();
     this.$wrap = $existing.length ? $existing : $('<div class="backstretch"></div>').css(styles.wrap).appendTo(this.$container);
-    // this.$wrap = $existing.length ? $existing : $('<picture></picture>').appendTo(this.$container);
-      // console.log(this.$wrap);
 
     // Non-body elements need some style adjustments
     if (!this.isBody) {
@@ -3142,8 +3121,7 @@ function FastClick(a,b){"use strict";function c(a,b){return function(){return a.
     });
 
     // this.wrap('<picture></picture>');
-
-
+    
 
     // Set the first image
     this.index = 0;
@@ -3240,11 +3218,6 @@ function FastClick(a,b){"use strict";function c(a,b){return function(){return a.
                         // Show the image, then delete the old one
                         // "speed" option has been deprecated, but we want backwards compatibilty
                         $(this).fadeIn(self.options.speed || self.options.fade, function () {
-                          
-                          if (oldImage.parent().is( "picture" )) {
-                          	oldImage.unwrap();
-                          }
-                          
                           oldImage.remove();
 
       					// $(this).wrap('<picture></picture>');
@@ -3267,7 +3240,7 @@ function FastClick(a,b){"use strict";function c(a,b){return function(){return a.
                         // Resize
                         self.resize();
                       })
-                      .appendTo(self.$wrap).wrap('<picture></picture>');
+                      .appendTo(self.$wrap);
 
         // Hack for IE img onload event
         self.$img.attr('src', self.images[newIndex]);
